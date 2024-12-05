@@ -1,0 +1,23 @@
+{
+  "name": "fastify-clickhouse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "fastify",
+    "clickhouse"
+  ],
+  "author": "embeddinglayer",
+  "license": "MIT",
+  "dependencies": {
+    "@clickhouse/client": "^1.9.0",
+    "clickhouse": "^2.6.0",
+    "fastify": "^5.1.0",
+    "fastify-plugin": "^5.0.1"
+  }
+}
