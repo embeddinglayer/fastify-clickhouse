@@ -35,23 +35,18 @@ declare namespace fastifyClickHouse {
     export { fastifyClickHouse as default };
 }
 
-const plugin = async (
-    fastify: FastifyInstance,
-    opts: fastifyClickHouse.FastifyClickHouseOptions
-): Promise<void> => {
+const plugin: FastifyPluginAsync<fastifyClickHouse.FastifyClickHouseOptions> = async (fastify, opts) => {
     if (!fastify.hasDecorator('clickhouse')) {
-        const client = await createClient(opts);
-        fastify.decorate('clickhouse', client);
-        fastify.addHook('onClose', async (server) => {
-            await server.clickhouse.close();
-        });
+      const client = await createClient(opts);
+      fastify.decorate('clickhouse', client);
+      fastify.addHook('onClose', async (server) => {
+        await server.clickhouse.close();
+      });
     } else {
-        throw new Error(
-            'fastify-clickhouse has already been registered.'
-        );
+      throw new Error('fastify-clickhouse has already been registered.');
     }
-};
-
+  };
+  
 export default fp(plugin, {
     name: 'fastify-clickhouse',
     fastify: '5.x',
